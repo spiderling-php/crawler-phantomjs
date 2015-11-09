@@ -1,0 +1,22 @@
+{
+    "name": "spiderling-php/crawler-phantomjs",
+    "description": "PhantomJS crawler for spiderling",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Ivan Kerin",
+            "email": "ikerin@gmail.com",
+            "role": "Author"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "SP\\CrawlerPhantomjs\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SP\\CrawlerPhantomjs\\Test\\": "tests/src/"
+        }
+    }
+}
