@@ -105,19 +105,20 @@ var PhantomjsConnection = (function (document, undefined) {
         },
 
         /**
-         * Set an option in a select as "selected" or "not selected", focus, blur and fire a changed event
+         * Set an option in a select as "selected", focus, blur and fire a changed event
          * @param  {integer} id    element id
-         * @param  {boolean} value new selected status
          */
-        setSelected: function(id, value) {
+        setSelected: function(id) {
             var elem = ids[id],
                     select = elem.parentNode.tagName === 'OPTGROUP' ? elem.parentNode.parentNode : elem.parentNode;
 
-            select.focus();
-            elem.selected = parseInt(value, 10);
-            select.blur();
+            if (! elem.selected) {
+                select.focus();
+                elem.selected = 1;
+                select.blur();
 
-            this.fireEvent(select, 'change');
+                this.fireEvent(select, 'change');
+            }
         },
 
         /**

@@ -9,14 +9,21 @@
             "role": "Author"
         }
     ],
+    "require": {
+        "spiderling-php/attempt" : "^0.1",
+        "spiderling-php/spiderling" : "dev-master",
+        "symfony/process" : "^2.6",
+        "guzzlehttp/guzzle" : "^6.1",
+        "psr/log" : "^1.0"
+    },
     "autoload": {
         "psr-4": {
-            "SP\\CrawlerPhantomjs\\": "src/"
+            "SP\\Phantomjs\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SP\\CrawlerPhantomjs\\Test\\": "tests/src/"
+            "SP\\Phantomjs\\Test\\": "tests/src/"
         }
     }
 }

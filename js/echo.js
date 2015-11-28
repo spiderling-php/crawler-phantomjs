@@ -15,6 +15,8 @@ server = require('webserver').create();
 
 server_port = parseInt(system.args[1]);
 
+console.log('Starting server on port ' + server_port);
+
 /**
  * Start the echo server
  */

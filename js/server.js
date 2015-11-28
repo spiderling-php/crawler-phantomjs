@@ -74,6 +74,7 @@ server.listen(server_port, function (request, response)
      */
     response.send = function (value) {
         response.write(JSON.stringify(value));
+        console.log('  Response sent: ' + JSON.stringify(value));
         response.close();
     };
 
@@ -160,16 +161,6 @@ server.listen(server_port, function (request, response)
         })
 
         /**
-         * Add a cookie, the post must contain name, value, domain. Optionals are path, httponly, secure, expires
-         *
-         * @example POST /cookie name=autologin&value=123123&domain=localhost
-         */
-        .connect('POST', /^\/cookie$/, function () {
-            page.addCookie(request.post);
-            response.send();
-        })
-
-        /**
          * Delete all cookies
          *
          * @example DELETE /cookies
@@ -177,15 +168,6 @@ server.listen(server_port, function (request, response)
         .connect('DELETE', /^\/cookies$/, function () {
             phantom.clearCookies();
             response.send();
-        })
-
-        /**
-         * Get all cookies
-         *
-         * @example GET /cookies
-         */
-        .connect('GET', /^\/cookies$/, function () {
-            response.send(phantom.cookies);
         })
 
         /**
@@ -230,17 +212,16 @@ server.listen(server_port, function (request, response)
 
         /**
          * Execute arbitrary javascript
-         * Optionally post an id of the element to pass to the method scope as "item"
          *
-         * @example POST /execute value=console.debug("test")&id=10
+         * @example POST /execute value=console.debug("test")
          * @value {string} url
          */
         .connect('POST', /^\/execute$/, function () {
             page.initConnection();
-            response.send(page.evaluate(function (callback_string, id) {
-                var callback = new Function(callback_string );
-                return callback(PhantomjsConnection.item(id));
-            }, request.post.value, request.post.id));
+            response.send(page.evaluate(function (callback_string) {
+                var callback = new Function(callback_string);
+                return callback();
+            }, request.post.value));
         })
 
         /**
@@ -406,6 +387,22 @@ server.listen(server_port, function (request, response)
         })
 
         /**
+         * Trigger a mousemove event
+         *
+         * @example POST /elements/1/hover
+         * @param  {integer} id element id
+         */
+        .connect('POST', /\/element\/(\d+)\/hover$/, function (id) {
+            page.initConnection();
+            var rect = page.evaluate(function(id){
+                return PhantomjsConnection.item(id).getBoundingClientRect();
+            }, id);
+
+            page.sendEvent('mousemove', rect.left + rect.width / 2, rect.top + rect.height / 2);
+            response.send();
+        })
+
+        /**
          * Check if a given option element is selected
          *
          * @example GET /elements/1/selected
@@ -434,16 +431,15 @@ server.listen(server_port, function (request, response)
         })
 
         /**
-         * Change the status of a option element (selected or not selected). The new value is past as post value.
+         * Change the status of a option element to selected.
          *
-         * @example POST /elements/1/selected value=1
-         * @param  {integer} id option element id
+         * @example POST /elements/1/select
          */
-        .connect('POST', /^\/element\/(\d+)\/selected$/, function (id) {
+        .connect('POST', /^\/element\/(\d+)\/select$/, function (id) {
             page.initConnection();
-            response.send(page.evaluate(function (id, value) {
-                return PhantomjsConnection.setSelected(id, value);
-            }, id, request.post.value));
+            response.send(page.evaluate(function (id) {
+                return PhantomjsConnection.setSelected(id);
+            }, id));
         });
 
         if ( ! request.connected) {
