@@ -22,8 +22,8 @@ install:
   - composer install
 
 before_script:
-  - cd php/tests/html && php -S localhost:4296
   - mkdir -p build/logs
+  - php -S localhost:4295 -t php/tests/html &
 
 script:
   - grunt test
