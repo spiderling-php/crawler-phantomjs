@@ -1,6 +1,4 @@
-language:
-  - php
-  - node_js
+language: node_js
 
 php:
   - 5.5
@@ -23,9 +21,7 @@ install:
 
 before_script:
   - mkdir -p build/logs
-
-script:
-  - npm test
+  - php -S localhost:4295 -t php/tests/html &
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
