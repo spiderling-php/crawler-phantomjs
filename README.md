@@ -1,10 +1,10 @@
 Crawler Phantomjs
 =================
 
-[![Build Status](https://travis-ci.org/spiderling-php/crawler-phantomjs.svg?branch=master)](https://travis-ci.org/spiderling-php/crawler-phantomjs)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spiderling-php/crawler-phantomjs/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spiderling-php/crawler-phantomjs/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/spiderling-php/crawler-phantomjs/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/spiderling-php/crawler-phantomjs/?branch=master)
-[![Latest Stable Version](https://poser.pugx.org/spiderling-php/crawler-phantomjs/v/stable)](https://packagist.org/packages/spiderling-php/crawler-phantomjs)
+[![Build Status](https://travis-ci.org/spiderling-php/phantom-driver.svg?branch=master)](https://travis-ci.org/spiderling-php/phantom-driver)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/spiderling-php/phantom-driver/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/spiderling-php/phantom-driver/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/spiderling-php/phantom-driver/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/spiderling-php/phantom-driver/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/spiderling-php/phantom-driver/v/stable)](https://packagist.org/packages/spiderling-php/phantom-driver)
 PhantomJS crawler for spiderling
 
 Installation
@@ -13,7 +13,7 @@ Installation
 Install via composer
 
 ```
-composer require spiderling-php/crawler-phantomjs
+composer require spiderling-php/phantom-driver
 ```
 
 Usage
