@@ -12,18 +12,18 @@
     "require": {
         "spiderling-php/attempt" : "^0.1",
         "spiderling-php/spiderling" : "dev-master",
-        "symfony/process" : "^2.6",
+        "symfony/process" : "^3.0",
         "guzzlehttp/guzzle" : "^6.1",
         "psr/log" : "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "SP\\Phantomjs\\": "src/"
+            "SP\\Phantomjs\\": "php/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SP\\Phantomjs\\Test\\": "tests/src/"
+            "SP\\Phantomjs\\Test\\": "php/tests/src/"
         }
     }
 }

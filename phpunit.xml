@@ -5,12 +5,12 @@
  forceCoversAnnotation="true">
   <testsuites>
     <testsuite>
-      <directory>tests/src</directory>
+      <directory>php/tests/src</directory>
     </testsuite>
   </testsuites>
   <filter>
     <whitelist>
-      <directory suffix=".php">src/</directory>
+      <directory suffix=".php">php/src</directory>
     </whitelist>
   </filter>
 </phpunit>

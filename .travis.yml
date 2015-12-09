@@ -3,7 +3,6 @@ language: php
 sudo: false
 
 php:
-  - 5.4
   - 5.5
   - 5.6
   - 7
@@ -12,6 +11,7 @@ php:
 cache:
   directories:
   - $HOME/.composer/cache
+  - $HOME/node_modules
 
 before_install:
   - composer selfupdate
@@ -23,6 +23,7 @@ before_script:
   - mkdir -p build/logs
 
 script:
+  - grunt test
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:

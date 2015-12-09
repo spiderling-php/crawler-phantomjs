@@ -20,8 +20,8 @@ class Process extends SymfonyProcess
         array $options = array()
     ) {
         parent::__construct(
-            $commandline ?: 'phantomjs server.js 8281 connect.js --ssl-protocol=any --ignore-ssl-errors=true',
-            $cwd ?: __DIR__.'/../js',
+            $commandline ?: 'phantomjs server.js --ssl-protocol=any --ignore-ssl-errors=true',
+            $cwd ?: realpath(__DIR__.'/../../js/src'),
             $env,
             $input,
             $timeout,

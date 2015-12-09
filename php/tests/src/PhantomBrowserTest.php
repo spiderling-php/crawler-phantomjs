@@ -3,14 +3,14 @@
 namespace SP\Phantomjs\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\PhantomDriver;
+use SP\Phantomjs\PhantomBrowser;
 use GuzzleHttp\Psr7\Uri;
 use SP\Spiderling\Query;
 
 /**
- * @coversDefaultClass SP\Phantomjs\PhantomDriver
+ * @coversDefaultClass SP\Phantomjs\PhantomBrowser
  */
-class PhantomDriverTest extends PHPUnit_Framework_TestCase
+class PhantomBrowserTest extends PHPUnit_Framework_TestCase
 {
     private $driver;
     private $server;
@@ -28,7 +28,20 @@ class PhantomDriverTest extends PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->driver = new PhantomDriver($this->server, $this->client);
+        $this->driver = new PhantomBrowser($this->server, $this->client);
+    }
+
+    /**
+     * @covers ::__construct
+     * @covers ::getClient
+     * @covers ::getServer
+     */
+    public function testConstruct()
+    {
+        $driver = new PhantomBrowser($this->server, $this->client);
+
+        $this->assertSame($this->server, $driver->getServer());
+        $this->assertSame($this->client, $driver->getClient());
     }
 
     /**
@@ -42,6 +55,21 @@ class PhantomDriverTest extends PHPUnit_Framework_TestCase
             ->with('cookies');
 
         $this->driver->removeAllCookies();
+    }
+
+    /**
+     * @covers ::start
+     */
+    public function testStart()
+    {
+        $this->server
+            ->expects($this->once())
+            ->method('start')
+            ->willReturn('promise');
+
+        $response = $this->driver->start();
+
+        $this->assertEquals('promise', $response);
     }
 
     /**

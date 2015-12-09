@@ -3,14 +3,11 @@
 namespace SP\Phantomjs\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\PhantomDriver;
+use SP\Phantomjs\PhantomBrowser;
 use SP\Spiderling\BrowserSession;
 use Symfony\Component\Process\Process;
 use GuzzleHttp\Psr7\Uri;
 
-/**
- * @coversNothing
- */
 class IntegrationTest extends PHPUnit_Framework_TestCase
 {
     public static $driver;
@@ -22,10 +19,13 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
         $server = new Process('php -S localhost:8295', __DIR__.'/../html');
         $server->start();
 
-        self::$driver = new PhantomDriver();
+        self::$driver = new PhantomBrowser();
         self::$driver->start()->wait();
     }
 
+    /**
+     * @covers SP\Phantomjs\PhantomBrowser::queryIds
+     */
     public function testAccessors()
     {
         $session = new BrowserSession(self::$driver);
@@ -172,13 +172,7 @@ MESSAGE;
         $this->assertEquals(['test message'], $messages);
 
         $this->assertEquals(
-            [
-                [
-                    'errorMessage' => "TypeError: 'undefined' is not a function (evaluating 'window.test()')",
-                    'sourceName' => '',
-                    'lineNumber' => '1',
-                ]
-            ],
+            ["TypeError: 'undefined' is not a function (evaluating 'window.test()') in :1"],
             $errors
         );
     }

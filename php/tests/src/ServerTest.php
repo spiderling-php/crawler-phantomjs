@@ -30,8 +30,7 @@ class ServerTest extends PHPUnit_Framework_TestCase
     /**
      * @covers ::start
      * @covers ::wait
-     * @covers ::getOutput
-     * @covers ::getErrorOutput
+     * @covers ::isStarted
      */
     public function testStart()
     {

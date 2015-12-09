@@ -14,9 +14,16 @@ use GuzzleHttp\Psr7\Request;
  * @copyright 2015, Clippings Ltd.
  * @license   http://spdx.org/licenses/BSD-3-Clause
  */
-class PhantomDriver implements BrowserInterface
+class PhantomBrowser implements BrowserInterface
 {
+    /**
+     * @var Server
+     */
     private $server;
+
+    /**
+     * @var Client
+     */
     private $client;
 
     public function __construct(Server $server = null, Client $client = null)
@@ -25,16 +32,25 @@ class PhantomDriver implements BrowserInterface
         $this->client = $client ?: new Client();
     }
 
+    /**
+     * @return Server
+     */
     public function getServer()
     {
         return $this->server;
     }
 
+    /**
+     * @return Client
+     */
     public function getClient()
     {
         return $this->client;
     }
 
+    /**
+     * @return GuzzleHttp\Promise\Promise
+     */
     public function start()
     {
         return $this->server->start();
