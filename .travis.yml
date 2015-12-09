@@ -1,6 +1,6 @@
-language: php
-
-sudo: false
+language:
+  - php
+  - node_js
 
 php:
   - 5.5
@@ -23,7 +23,6 @@ install:
 
 before_script:
   - mkdir -p build/logs
-  - php -S localhost:4295 -t php/tests/html &
 
 script:
   - grunt test
