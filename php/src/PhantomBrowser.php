@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Phantomjs;
+namespace SP\Driver;
 
 use SP\Spiderling\BrowserInterface;
 use Psr\Http\Message\UriInterface;

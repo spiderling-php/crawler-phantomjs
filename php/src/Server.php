@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Phantomjs;
+namespace SP\Driver;
 
 use Symfony\Component\Process\Process as SymfonyProcess;
 use Psr\Log\LoggerInterface;

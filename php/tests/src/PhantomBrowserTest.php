@@ -1,14 +1,14 @@
 <?php
 
-namespace SP\Phantomjs\Test;
+namespace SP\Driver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\PhantomBrowser;
+use SP\Driver\PhantomBrowser;
 use GuzzleHttp\Psr7\Uri;
 use SP\Spiderling\Query;
 
 /**
- * @coversDefaultClass SP\Phantomjs\PhantomBrowser
+ * @coversDefaultClass SP\Driver\PhantomBrowser
  */
 class PhantomBrowserTest extends PHPUnit_Framework_TestCase
 {
@@ -19,12 +19,12 @@ class PhantomBrowserTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->server = $this
-            ->getMockBuilder('SP\Phantomjs\Server')
+            ->getMockBuilder('SP\Driver\Server')
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->client = $this
-            ->getMockBuilder('SP\Phantomjs\Client')
+            ->getMockBuilder('SP\Driver\Client')
             ->disableOriginalConstructor()
             ->getMock();
 

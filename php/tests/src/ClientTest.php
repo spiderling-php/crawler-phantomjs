@@ -1,13 +1,13 @@
 <?php
 
-namespace SP\Phantomjs\Test;
+namespace SP\Driver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\Client;
+use SP\Driver\Client;
 use GuzzleHttp\Psr7\Response;
 
 /**
- * @coversDefaultClass SP\Phantomjs\Client
+ * @coversDefaultClass SP\Driver\Client
  */
 class ClientTest extends PHPUnit_Framework_TestCase
 {
@@ -26,7 +26,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testGetJson()
     {
-        $client = $this->getMock('SP\Phantomjs\Client', ['get']);
+        $client = $this->getMock('SP\Driver\Client', ['get']);
 
         $client
             ->expects($this->once())
@@ -44,7 +44,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testDeleteJson()
     {
-        $client = $this->getMock('SP\Phantomjs\Client', ['delete']);
+        $client = $this->getMock('SP\Driver\Client', ['delete']);
 
         $client
             ->expects($this->once())
@@ -62,7 +62,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
      */
     public function testPostJson()
     {
-        $client = $this->getMock('SP\Phantomjs\Client', ['post']);
+        $client = $this->getMock('SP\Driver\Client', ['post']);
 
         $client
             ->expects($this->once())

@@ -1,13 +1,13 @@
 <?php
 
-namespace SP\Phantomjs\Test;
+namespace SP\Driver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\Server;
+use SP\Driver\Server;
 use Symfony\Component\Process\Process;
 
 /**
- * @coversDefaultClass SP\Phantomjs\Server
+ * @coversDefaultClass SP\Driver\Server
  */
 class ServerTest extends PHPUnit_Framework_TestCase
 {

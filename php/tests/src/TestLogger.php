@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Phantomjs\Test;
+namespace SP\Driver\Test;
 
 use Psr\Log\AbstractLogger;
 

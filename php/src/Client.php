@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Phantomjs;
+namespace SP\Driver;
 
 use GuzzleHttp\Client as GuzzleClient;
 

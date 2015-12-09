@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SP\\Phantomjs\\": "php/src/"
+            "SP\\Driver\\": "php/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SP\\Phantomjs\\Test\\": "php/tests/src/"
+            "SP\\Driver\\Test\\": "php/tests/src/"
         }
     }
 }

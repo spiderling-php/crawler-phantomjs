@@ -1,9 +1,9 @@
 <?php
 
-namespace SP\Phantomjs\Test;
+namespace SP\Driver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\PhantomBrowser;
+use SP\Driver\PhantomBrowser;
 use SP\Spiderling\BrowserSession;
 use Symfony\Component\Process\Process;
 use GuzzleHttp\Psr7\Uri;
@@ -24,7 +24,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SP\Phantomjs\PhantomBrowser::queryIds
+     * @covers SP\Driver\PhantomBrowser::queryIds
      */
     public function testAccessors()
     {

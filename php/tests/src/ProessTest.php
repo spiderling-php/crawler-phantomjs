@@ -1,13 +1,13 @@
 <?php
 
-namespace SP\Phantomjs\Test;
+namespace SP\Driver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Phantomjs\Process;
+use SP\Driver\Process;
 use GuzzleHttp\Psr7\Response;
 
 /**
- * @coversDefaultClass SP\Phantomjs\Process
+ * @coversDefaultClass SP\Driver\Process
  */
 class ProcessTest extends PHPUnit_Framework_TestCase
 {
