@@ -18,6 +18,13 @@ composer require spiderling-php/crawler-phantomjs
 
 Usage
 -----
+```php
+use SP\Driver\PhantomSession;
+
+$session = new PhantomSession();
+
+$session->open('http://google.com');
+```
 
 License
 -------
