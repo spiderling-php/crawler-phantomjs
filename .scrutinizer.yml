@@ -1,5 +1,5 @@
 filter:
-  paths: [src/*]
+  paths: [php/src/*]
 
 tools:
   php_code_sniffer:
