@@ -21,6 +21,9 @@ class Client extends GuzzleClient
         );
     }
 
+    /**
+     * @param  string $uri
+     */
     public function deleteJson($uri)
     {
         $response = $this->delete($uri);
@@ -28,6 +31,9 @@ class Client extends GuzzleClient
         return json_decode($response->getBody()->getContents(), true);
     }
 
+    /**
+     * @param  string $uri
+     */
     public function getJson($uri)
     {
         $response = $this->get($uri);
@@ -35,9 +41,13 @@ class Client extends GuzzleClient
         return json_decode($response->getBody()->getContents(), true);
     }
 
+    /**
+     * @param  string $uri
+     * @param  string $value
+     */
     public function postJson($uri, $value = null)
     {
-        $options = $value ? ['form_params' => ['value' => $value]] : null;
+        $options = $value ? ['form_params' => ['value' => $value]] : [];
         $response = $this->post($uri, $options);
 
         return json_decode($response->getBody()->getContents(), true);

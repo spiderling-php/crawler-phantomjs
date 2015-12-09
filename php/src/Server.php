@@ -17,7 +17,7 @@ use GuzzleHttp\Promise\Promise;
 class Server
 {
     /**
-     * @var Symfony\Component\Process\Process
+     * @var SymfonyProcess
      */
     private $process;
 
