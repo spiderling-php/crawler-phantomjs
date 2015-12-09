@@ -1,4 +1,4 @@
-language: node_js
+language: php
 
 php:
   - 5.5
@@ -13,15 +13,17 @@ cache:
 
 before_install:
   - composer selfupdate
-  - npm install -g npm@'>=2.13.5'
   - npm install -g grunt-cli
 
 install:
+  - npm install
   - composer install
 
 before_script:
   - mkdir -p build/logs
-  - php -S localhost:4295 -t php/tests/html &
+
+script:
+  - grunt test
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
