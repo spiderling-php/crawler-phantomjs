@@ -9,6 +9,11 @@ php:
 env:
   - TRAVIS_NODE_VERSION="4"
 
+matrix:
+  allow_failures:
+    - php: hhvm
+  fast_finish: true
+
 cache:
   directories:
   - $HOME/.composer/cache
