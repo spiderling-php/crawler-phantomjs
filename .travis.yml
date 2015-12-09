@@ -6,6 +6,9 @@ php:
   - 7
   - hhvm
 
+env:
+  - TRAVIS_NODE_VERSION="4"
+
 cache:
   directories:
   - $HOME/.composer/cache
@@ -13,6 +16,7 @@ cache:
 
 before_install:
   - composer selfupdate
+  - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
   - npm install -g grunt-cli
 
 install:
@@ -23,7 +27,7 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - grunt test
+  - npm test
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
