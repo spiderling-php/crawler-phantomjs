@@ -16,7 +16,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
     {
         parent::setUpBeforeClass();
 
-        $server = new Process('php -S localhost:8295', __DIR__.'/../html');
+        $server = new Process('php -S localhost:4295', __DIR__.'/../html');
         $server->start();
 
         self::$driver = new PhantomBrowser();
@@ -30,7 +30,7 @@ class IntegrationTest extends PHPUnit_Framework_TestCase
     {
         $session = new BrowserSession(self::$driver);
 
-        $session->open('http://localhost:8295');
+        $session->open('http://localhost:4295');
 
         $input = $session->getLink('Subpage 1');
 
@@ -72,7 +72,7 @@ MESSAGE;
     {
         $session = new BrowserSession(self::$driver);
 
-        $session->open('http://localhost:8295');
+        $session->open('http://localhost:4295');
 
         $p1 = $session->get('#p-1');
 
@@ -128,7 +128,7 @@ MESSAGE;
     {
         $session = new BrowserSession(self::$driver);
 
-        $session->open('http://localhost:8295');
+        $session->open('http://localhost:4295');
 
         $session->saveScreenshot(__DIR__.'/../file.jpg');
 
@@ -141,7 +141,7 @@ MESSAGE;
     {
         $session = new BrowserSession(self::$driver);
 
-        $session->open('http://localhost:8295');
+        $session->open('http://localhost:4295');
 
         $session->executeJs("
             document
@@ -161,7 +161,7 @@ MESSAGE;
     {
         $session = new BrowserSession(self::$driver);
 
-        $session->open('http://localhost:8295');
+        $session->open('http://localhost:4295');
 
         $session->executeJs('console.log("test message")');
         $session->executeJs('window.test();');
@@ -181,7 +181,7 @@ MESSAGE;
     {
         $session = new BrowserSession(self::$driver);
 
-        $session->open('http://localhost:8295');
+        $session->open('http://localhost:4295');
 
         $email = $session->getField('Enter Email');
         $this->assertEquals('tom@example.com', $email->getValue());
