@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e3bc16f99292724b729ddc8c90aee871",
-    "content-hash": "d86ba68d154cc273e3e554433ad874dc",
+    "hash": "7fd1513aee5ed20fcfc45fd32bab4880",
+    "content-hash": "fbd156ff17200907d961b4abc5269938",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -306,12 +306,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/spiderling.git",
-                "reference": "2c5ba797ca8c781552058c52e82999e1e95b30fc"
+                "reference": "319d3c49f01bf7aa64478eac628a2110d19cf6cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/spiderling/zipball/2c5ba797ca8c781552058c52e82999e1e95b30fc",
-                "reference": "2c5ba797ca8c781552058c52e82999e1e95b30fc",
+                "url": "https://api.github.com/repos/spiderling-php/spiderling/zipball/319d3c49f01bf7aa64478eac628a2110d19cf6cd",
+                "reference": "319d3c49f01bf7aa64478eac628a2110d19cf6cd",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,7 @@
                 }
             ],
             "description": "Browser emulator, for crawling web pages",
-            "time": "2015-11-28 11:42:01"
+            "time": "2015-12-17 15:26:09"
         },
         {
             "name": "symfony/css-selector",
@@ -444,11 +444,51 @@
             "time": "2015-11-30 12:36:17"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "spiderling-php/driver-test",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiderling-php/driver-test.git",
+                "reference": "9495c3b608c62dde4e6425d79e6837990eced996"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/9495c3b608c62dde4e6425d79e6837990eced996",
+                "reference": "9495c3b608c62dde4e6425d79e6837990eced996",
+                "shasum": ""
+            },
+            "require": {
+                "spiderling-php/spiderling": "dev-master",
+                "symfony/process": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SP\\DriverTest\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Kerin",
+                    "email": "ikerin@gmail.com",
+                    "role": "Author"
+                }
+            ],
+            "description": "Integration tests for spiderling drivers",
+            "time": "2015-12-17 15:27:52"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "spiderling-php/spiderling": 20
+        "spiderling-php/spiderling": 20,
+        "spiderling-php/driver-test": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

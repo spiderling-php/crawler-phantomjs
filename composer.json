@@ -16,6 +16,9 @@
         "guzzlehttp/guzzle" : "^6.1",
         "psr/log" : "^1.0"
     },
+    "require-dev": {
+        "spiderling-php/driver-test" : "dev-master"
+    },
     "autoload": {
         "psr-4": {
             "SP\\Driver\\": "php/src/"
