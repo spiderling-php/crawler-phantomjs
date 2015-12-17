@@ -1,5 +1,5 @@
 {
-    "name": "spiderling-php/crawler-phantomjs",
+    "name": "spiderling-php/phantom-driver",
     "description": "PhantomJS crawler for spiderling",
     "license": "BSD-3-Clause",
     "authors": [

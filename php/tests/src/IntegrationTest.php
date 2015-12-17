@@ -7,8 +7,6 @@ use SP\Driver\PhantomBrowser;
 
 class IntegrationTest extends BrowserDriverTest
 {
-    public static $driver;
-
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();

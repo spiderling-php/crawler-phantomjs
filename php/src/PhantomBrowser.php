@@ -141,7 +141,7 @@ class PhantomBrowser implements BrowserInterface
      */
     public function getText($id)
     {
-        return $this->client->getJson("element/{$id}/text");
+        return trim($this->client->getJson("element/{$id}/text"));
     }
 
     /**
