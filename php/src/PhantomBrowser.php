@@ -227,6 +227,15 @@ class PhantomBrowser implements BrowserInterface
 
     /**
      * @param  string $id
+     * @param  mixed  $file
+     */
+    public function setFile($id, $file)
+    {
+        $this->client->postJson("element/{$id}/upload", $file);
+    }
+
+    /**
+     * @param  string $id
      */
     public function click($id)
     {
