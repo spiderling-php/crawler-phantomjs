@@ -306,12 +306,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/spiderling.git",
-                "reference": "9d61ac9c69cc318f3acec9159c6dace9875051b4"
+                "reference": "c503a3106b92334e6b2b5031d0a780cba7d30a57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/spiderling/zipball/9d61ac9c69cc318f3acec9159c6dace9875051b4",
-                "reference": "9d61ac9c69cc318f3acec9159c6dace9875051b4",
+                "url": "https://api.github.com/repos/spiderling-php/spiderling/zipball/c503a3106b92334e6b2b5031d0a780cba7d30a57",
+                "reference": "c503a3106b92334e6b2b5031d0a780cba7d30a57",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,7 @@
                 }
             ],
             "description": "Browser emulator, for crawling web pages",
-            "time": "2015-12-18 10:54:58"
+            "time": "2015-12-18 16:42:22"
         },
         {
             "name": "symfony/css-selector",
@@ -451,12 +451,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/driver-test.git",
-                "reference": "f8fb511ff3741f98d1e6a89a9837cc62955479e5"
+                "reference": "fae99b3322f3ad0d22c9275f2f4eff63860d9f3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/f8fb511ff3741f98d1e6a89a9837cc62955479e5",
-                "reference": "f8fb511ff3741f98d1e6a89a9837cc62955479e5",
+                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/fae99b3322f3ad0d22c9275f2f4eff63860d9f3c",
+                "reference": "fae99b3322f3ad0d22c9275f2f4eff63860d9f3c",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 }
             ],
             "description": "Integration tests for spiderling drivers",
-            "time": "2015-12-18 14:37:09"
+            "time": "2015-12-18 16:50:00"
         }
     ],
     "aliases": [],
