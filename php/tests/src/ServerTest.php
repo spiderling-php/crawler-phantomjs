@@ -1,13 +1,13 @@
 <?php
 
-namespace SP\Driver\Test;
+namespace SP\PhantomDriver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Driver\Server;
+use SP\PhantomDriver\Server;
 use Symfony\Component\Process\Process;
 
 /**
- * @coversDefaultClass SP\Driver\Server
+ * @coversDefaultClass SP\PhantomDriver\Server
  */
 class ServerTest extends PHPUnit_Framework_TestCase
 {

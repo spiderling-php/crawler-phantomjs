@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Driver;
+namespace SP\PhantomDriver;
 
 use SP\Spiderling\BrowserSession;
 
@@ -9,10 +9,10 @@ use SP\Spiderling\BrowserSession;
  * @copyright 2015, Clippings Ltd.
  * @license   http://spdx.org/licenses/BSD-3-Clause
  */
-class PhantomSession extends BrowserSession
+class Session extends BrowserSession
 {
-    public function __construct(PhantomBrowser $browser = null)
+    public function __construct(Browser $browser = null)
     {
-        parent::__construct($browser ?: new PhantomBrowser());
+        parent::__construct($browser ?: new Browser());
     }
 }

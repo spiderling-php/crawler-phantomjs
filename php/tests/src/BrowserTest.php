@@ -1,16 +1,16 @@
 <?php
 
-namespace SP\Driver\Test;
+namespace SP\PhantomDriver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Driver\PhantomBrowser;
+use SP\PhantomDriver\Browser;
 use GuzzleHttp\Psr7\Uri;
 use SP\Spiderling\Query;
 
 /**
- * @coversDefaultClass SP\Driver\PhantomBrowser
+ * @coversDefaultClass SP\PhantomDriver\Browser
  */
-class PhantomBrowserTest extends PHPUnit_Framework_TestCase
+class BrowserTest extends PHPUnit_Framework_TestCase
 {
     private $driver;
     private $server;
@@ -19,16 +19,16 @@ class PhantomBrowserTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->server = $this
-            ->getMockBuilder('SP\Driver\Server')
+            ->getMockBuilder('SP\PhantomDriver\Server')
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->client = $this
-            ->getMockBuilder('SP\Driver\Client')
+            ->getMockBuilder('SP\PhantomDriver\Client')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->driver = new PhantomBrowser($this->server, $this->client);
+        $this->driver = new Browser($this->server, $this->client);
     }
 
     /**
@@ -38,7 +38,7 @@ class PhantomBrowserTest extends PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $driver = new PhantomBrowser($this->server, $this->client);
+        $driver = new Browser($this->server, $this->client);
 
         $this->assertSame($this->server, $driver->getServer());
         $this->assertSame($this->client, $driver->getClient());

@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Driver;
+namespace SP\PhantomDriver;
 
 use SP\Spiderling\BrowserInterface;
 use Psr\Http\Message\UriInterface;
@@ -14,7 +14,7 @@ use GuzzleHttp\Psr7\Request;
  * @copyright 2015, Clippings Ltd.
  * @license   http://spdx.org/licenses/BSD-3-Clause
  */
-class PhantomBrowser implements BrowserInterface
+class Browser implements BrowserInterface
 {
     /**
      * @var Server

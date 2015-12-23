@@ -1,6 +1,6 @@
 <?php
 
-namespace SP\Driver;
+namespace SP\PhantomDriver;
 
 use GuzzleHttp\Client as GuzzleClient;
 

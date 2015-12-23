@@ -1,9 +1,9 @@
 <?php
 
-namespace SP\Driver\Test;
+namespace SP\PhantomDriver\Test;
 
 use SP\DriverTest\BrowserDriverTest;
-use SP\Driver\PhantomBrowser;
+use SP\PhantomDriver\Browser;
 
 class IntegrationTest extends BrowserDriverTest
 {
@@ -11,7 +11,7 @@ class IntegrationTest extends BrowserDriverTest
     {
         parent::setUpBeforeClass();
 
-        $driver = new PhantomBrowser();
+        $driver = new Browser();
         $driver->start()->wait();
 
         self::setDriver($driver);

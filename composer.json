@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "SP\\Driver\\": "php/src/"
+            "SP\\PhantomDriver\\": "php/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "SP\\Driver\\Test\\": "php/tests/src/"
+            "SP\\PhantomDriver\\Test\\": "php/tests/src/"
         }
     }
 }

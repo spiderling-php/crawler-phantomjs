@@ -1,23 +1,23 @@
 <?php
 
-namespace SP\Driver\Test;
+namespace SP\PhantomDriver\Test;
 
 use PHPUnit_Framework_TestCase;
-use SP\Driver\PhantomSession;
+use SP\PhantomDriver\Session;
 
 /**
- * @coversDefaultClass SP\Driver\PhantomSession
+ * @coversDefaultClass SP\PhantomDriver\Session
  */
-class PhantomSessionTest extends PHPUnit_Framework_TestCase
+class SessionTest extends PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
         $browser = $this
-            ->getMockBuilder('SP\Driver\PhantomBrowser')
+            ->getMockBuilder('SP\PhantomDriver\Browser')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $session = new PhantomSession($browser);
+        $session = new Session($browser);
 
         $this->assertInstanceOf('SP\Spiderling\BrowserInterface', $session->getBrowser());
 
@@ -26,8 +26,8 @@ class PhantomSessionTest extends PHPUnit_Framework_TestCase
 
     public function testConstructDefault()
     {
-        $session = new PhantomSession();
+        $session = new Session();
 
-        $this->assertInstanceOf('SP\Driver\PhantomBrowser', $session->getBrowser());
+        $this->assertInstanceOf('SP\PhantomDriver\Browser', $session->getBrowser());
     }
 }
