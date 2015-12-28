@@ -81,6 +81,14 @@
             return pageLog.getErrors()
         }))
 
+        .get('/alert', new Response(function () {
+            return pageLog.getAlert()
+        }))
+
+        .post('/confirm', new Response(function (request) {
+            return pageLog.setConfirm(request.post.value)
+        }))
+
         .get('/messages', new Response(function () {
             return pageLog.getMessages()
         }))

@@ -12,6 +12,8 @@ module.exports = (function () {
 
         this.messages = []
         this.errors = []
+        this.alert = null
+        this.confirm = true
 
         page.onError = function (message, trace) {
             self.errors.push(message + ' in ' + trace[0].file + ':' + trace[0].line)
@@ -23,6 +25,16 @@ module.exports = (function () {
 
         page.onConsoleMessage = function (message) {
             self.messages.push(message)
+        }
+
+        page.onAlert = function (message) {
+            self.alert = message
+        }
+
+        page.onConfirm = function (message) {
+            self.alert = message
+
+            return self.confirm
         }
     }
 
@@ -41,11 +53,27 @@ module.exports = (function () {
     }
 
     /**
+     * Return alert
+     */
+    PageLog.prototype.getAlert = function () {
+        return this.alert
+    }
+
+    /**
+     * Set how to respond to a confirm
+     */
+    PageLog.prototype.setConfirm = function (confirm) {
+        this.confirm = confirm
+    }
+
+    /**
      * Clear all
      */
     PageLog.prototype.clear = function () {
         this.messages = []
         this.errors = []
+        this.alert = null
+        this.confirm = true
     }
 
     return PageLog

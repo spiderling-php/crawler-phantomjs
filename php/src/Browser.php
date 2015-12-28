@@ -61,15 +61,15 @@ class Browser implements BrowserInterface
      */
     public function getAlertText()
     {
-
+        return $this->client->getJson('alert');
     }
 
     /**
-     * @param  string $confirm
+     * @param  boolean $confirm
      */
     public function confirm($confirm)
     {
-
+        $this->client->postJson('confirm', (bool) $confirm);
     }
 
     public function removeAllCookies()

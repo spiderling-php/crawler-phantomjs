@@ -306,12 +306,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/spiderling.git",
-                "reference": "c503a3106b92334e6b2b5031d0a780cba7d30a57"
+                "reference": "9e3cb6642ba8a2ff6b546c7da66529dac368e3cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/spiderling/zipball/c503a3106b92334e6b2b5031d0a780cba7d30a57",
-                "reference": "c503a3106b92334e6b2b5031d0a780cba7d30a57",
+                "url": "https://api.github.com/repos/spiderling-php/spiderling/zipball/9e3cb6642ba8a2ff6b546c7da66529dac368e3cd",
+                "reference": "9e3cb6642ba8a2ff6b546c7da66529dac368e3cd",
                 "shasum": ""
             },
             "require": {
@@ -339,20 +339,20 @@
                 }
             ],
             "description": "Browser emulator, for crawling web pages",
-            "time": "2015-12-18 16:42:22"
+            "time": "2015-12-28 12:21:42"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "b600fec37c0efca08046d481d79e7eabc07108ff"
+                "reference": "eaa3320e32f09a01dc432c6efbe8051aee59cfef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/b600fec37c0efca08046d481d79e7eabc07108ff",
-                "reference": "b600fec37c0efca08046d481d79e7eabc07108ff",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/eaa3320e32f09a01dc432c6efbe8051aee59cfef",
+                "reference": "eaa3320e32f09a01dc432c6efbe8051aee59cfef",
                 "shasum": ""
             },
             "require": {
@@ -392,20 +392,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2015-10-30 20:15:42"
+            "time": "2015-12-05 17:37:59"
         },
         {
             "name": "symfony/process",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "01383ed02a1020759bc8ee5d975fcec04ba16fbf"
+                "reference": "f4794f1d00f0746621be3020ffbd8c5e0b217ee3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/01383ed02a1020759bc8ee5d975fcec04ba16fbf",
-                "reference": "01383ed02a1020759bc8ee5d975fcec04ba16fbf",
+                "url": "https://api.github.com/repos/symfony/process/zipball/f4794f1d00f0746621be3020ffbd8c5e0b217ee3",
+                "reference": "f4794f1d00f0746621be3020ffbd8c5e0b217ee3",
                 "shasum": ""
             },
             "require": {
@@ -441,7 +441,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:36:17"
+            "time": "2015-12-23 11:04:02"
         }
     ],
     "packages-dev": [
@@ -451,12 +451,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/driver-test.git",
-                "reference": "fae99b3322f3ad0d22c9275f2f4eff63860d9f3c"
+                "reference": "42323b9e4d21e254e6dbca6bc780863e3ca22871"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/fae99b3322f3ad0d22c9275f2f4eff63860d9f3c",
-                "reference": "fae99b3322f3ad0d22c9275f2f4eff63860d9f3c",
+                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/42323b9e4d21e254e6dbca6bc780863e3ca22871",
+                "reference": "42323b9e4d21e254e6dbca6bc780863e3ca22871",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 }
             ],
             "description": "Integration tests for spiderling drivers",
-            "time": "2015-12-18 16:50:00"
+            "time": "2015-12-28 12:58:53"
         }
     ],
     "aliases": [],
