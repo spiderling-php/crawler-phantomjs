@@ -2,12 +2,13 @@
 
 namespace SP\PhantomDriver;
 
-use Symfony\Component\Process\Process as SymfonyProcess;
+use Symfony\Component\Process\Process;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use RuntimeException;
 use SP\Attempt\Attempt;
 use GuzzleHttp\Promise\Promise;
+use GuzzleHttp\Client;
 
 /**
  * @author    Ivan Kerin <ikerin@gmail.com>
@@ -26,26 +27,36 @@ class Server
      */
     private $logger;
 
-    public function __construct(SymfonyProcess $process = null, LoggerInterface $logger = null)
-    {
-        $this->process = $process ?: new Process();
+    public function __construct(
+        $command = 'phantomjs server.js --ssl-protocol=any --ignore-ssl-errors=true --port=8281',
+        LoggerInterface $logger = null
+    ) {
+        $this->process = new Process($command, realpath(__DIR__.'/../../js/src'));
         $this->logger = $logger ?: new NullLogger();
     }
 
-    public function wait()
+    public function getClient(array $options = [])
     {
-        $attempt = new Attempt(function () {
+        return new Client(array_merge(['base_uri' => 'http://localhost:8281'], $options));
+    }
+
+    /**
+     * @return Attempt
+     */
+    public function getWaitAttempt()
+    {
+        return new Attempt(function () {
             return $this->isStarted();
         });
+    }
 
-        if (false === $attempt->execute()) {
-            throw new RuntimeException(sprintf(
-                'Process %s failed to start properly',
-                $this->process->getCommandLine()
-            ));
-        }
-
-        return true;
+    /**
+     * @return bool
+     * @throws RuntimeException
+     */
+    public function wait()
+    {
+        return $this->getWaitAttempt()->executeOrFail();
     }
 
     public function start()

@@ -18,23 +18,42 @@ class ServerTest extends PHPUnit_Framework_TestCase
      */
     public function testConstruct()
     {
-        $process = new Process('phantomjs echo.js');
+        $normal = new Server();
+
+        $this->assertInstanceOf('Symfony\Component\Process\Process', $normal->getProcess());
+        $this->assertInstanceOf('Psr\Log\NullLogger', $normal->getLogger());
+
         $logger = new TestLogger();
+        $server = new Server('phantomjs test.js', $logger);
 
-        $server = new Server($process, $logger);
-
-        $this->assertSame($process, $server->getProcess());
+        $this->assertSame('phantomjs test.js', $server->getProcess()->getCommandline());
         $this->assertSame($logger, $server->getLogger());
+    }
+
+    /**
+     * @covers ::getClient
+     */
+    public function testGetClient()
+    {
+        $server = new Server();
+        $client = $server->getClient();
+
+        $this->assertInstanceOf(
+            'GuzzleHttp\ClientInterface',
+            $client,
+            'It should be a valid and proper interface for Brwoser'
+        );
     }
 
     /**
      * @covers ::start
      * @covers ::wait
+     * @covers ::getWaitAttempt
      * @covers ::isStarted
      */
     public function testStart()
     {
-        $process = new Process('sleep .01 && echo "Started working" && echo "Some error message" >> /dev/stderr');
+        $process = 'sleep .01 && echo "Started working" && echo "Some error message" >> /dev/stderr';
 
         $logger = new TestLogger();
 

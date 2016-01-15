@@ -4,11 +4,14 @@ namespace SP\PhantomDriver;
 
 use SP\Spiderling\BrowserInterface;
 use Psr\Http\Message\UriInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use SP\Spiderling\Query;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Uri;
 use SP\Attempt\Attempt;
 use GuzzleHttp\Psr7\Request;
+
 /**
  * @author    Ivan Kerin <ikerin@gmail.com>
  * @copyright 2015, Clippings Ltd.
@@ -17,43 +20,26 @@ use GuzzleHttp\Psr7\Request;
 class Browser implements BrowserInterface
 {
     /**
-     * @var Server
-     */
-    private $server;
-
-    /**
-     * @var Client
+     * @var ClientInterface
      */
     private $client;
 
-    public function __construct(Server $server = null, Client $client = null)
+    public function __construct(ClientInterface $client)
     {
-        $this->server = $server ?: new Server();
-        $this->client = $client ?: new Client();
+        $this->client = $client;
     }
 
     /**
-     * @return Server
-     */
-    public function getServer()
-    {
-        return $this->server;
-    }
-
-    /**
-     * @return Client
+     * @return ClientInterface
      */
     public function getClient()
     {
         return $this->client;
     }
 
-    /**
-     * @return GuzzleHttp\Promise\Promise
-     */
-    public function start()
+    public function jsonResponse(ResponseInterface $response)
     {
-        return $this->server->start();
+        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**
@@ -61,7 +47,7 @@ class Browser implements BrowserInterface
      */
     public function getAlertText()
     {
-        return $this->client->getJson('alert');
+        return $this->jsonResponse($this->client->request('get', 'alert'));
     }
 
     /**
@@ -69,12 +55,12 @@ class Browser implements BrowserInterface
      */
     public function confirm($confirm)
     {
-        $this->client->postJson('confirm', (bool) $confirm);
+        $this->client->request('post', 'confirm', ['form_params' => ['value' => (bool) $confirm]]);
     }
 
     public function removeAllCookies()
     {
-        $this->client->deleteJson('cookies');
+        $this->client->request('delete', 'cookies');
     }
 
     /**
@@ -83,7 +69,7 @@ class Browser implements BrowserInterface
      */
     public function executeJs($javascript)
     {
-        return $this->client->postJson('execute', $javascript);
+        return $this->jsonResponse($this->client->request('post', 'execute', ['form_params' => ['value' => $javascript]]));
     }
 
     /**
@@ -91,7 +77,7 @@ class Browser implements BrowserInterface
      */
     public function getJsErrors()
     {
-        return $this->client->getJson('errors');
+        return $this->jsonResponse($this->client->request('get', 'errors'));
     }
 
     /**
@@ -99,7 +85,7 @@ class Browser implements BrowserInterface
      */
     public function getJsMessages()
     {
-        return $this->client->getJson('messages');
+        return $this->jsonResponse($this->client->request('get', 'messages'));
     }
 
     /**
@@ -107,7 +93,7 @@ class Browser implements BrowserInterface
      */
     public function moveMouseTo($id)
     {
-        $this->client->postJson("element/{$id}/hover");
+        $this->client->request('post', "element/{$id}/hover");
     }
 
     /**
@@ -115,7 +101,7 @@ class Browser implements BrowserInterface
      */
     public function saveScreenshot($file)
     {
-        $this->client->postJson('screenshot', $file);
+        $this->client->request('post', 'screenshot', ['form_params' => ['value' => $file]]);
     }
 
 
@@ -124,7 +110,7 @@ class Browser implements BrowserInterface
      */
     public function open(UriInterface $uri)
     {
-        $this->client->postJson('url', (string) $uri);
+        $this->client->request('post', 'url', ['form_params' => ['value' => (string) $uri]]);
     }
 
     /**
@@ -132,7 +118,7 @@ class Browser implements BrowserInterface
      */
     public function getUri()
     {
-        return new Uri($this->client->getJson('url'));
+        return new Uri($this->jsonResponse($this->client->request('get', 'url')));
     }
 
     /**
@@ -141,7 +127,7 @@ class Browser implements BrowserInterface
      */
     public function getText($id)
     {
-        return trim($this->client->getJson("element/{$id}/text"));
+        return trim($this->jsonResponse($this->client->request('get', "element/{$id}/text")));
     }
 
     /**
@@ -150,7 +136,7 @@ class Browser implements BrowserInterface
      */
     public function getTagName($id)
     {
-        return $this->client->getJson("element/{$id}/name");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/name"));
     }
 
     /**
@@ -160,7 +146,7 @@ class Browser implements BrowserInterface
      */
     public function getAttribute($id, $name)
     {
-        return $this->client->getJson("element/{$id}/attribute/{$name}");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/attribute/{$name}"));
     }
 
     /**
@@ -169,7 +155,7 @@ class Browser implements BrowserInterface
      */
     public function getHtml($id)
     {
-        return $this->client->getJson("element/{$id}/html");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/html"));
     }
 
     /**
@@ -177,7 +163,7 @@ class Browser implements BrowserInterface
      */
     public function getFullHtml()
     {
-        return $this->client->getJson('source');
+        return $this->jsonResponse($this->client->request('get', 'source'));
     }
 
     /**
@@ -186,7 +172,7 @@ class Browser implements BrowserInterface
      */
     public function getValue($id)
     {
-        return $this->client->getJson("element/{$id}/value");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/value"));
     }
 
     /**
@@ -195,7 +181,7 @@ class Browser implements BrowserInterface
      */
     public function isVisible($id)
     {
-        return $this->client->getJson("element/{$id}/visible");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/visible"));
     }
 
     /**
@@ -204,7 +190,7 @@ class Browser implements BrowserInterface
      */
     public function isSelected($id)
     {
-        return $this->client->getJson("element/{$id}/selected");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/selected"));
     }
 
     /**
@@ -213,7 +199,7 @@ class Browser implements BrowserInterface
      */
     public function isChecked($id)
     {
-        return $this->client->getJson("element/{$id}/checked");
+        return $this->jsonResponse($this->client->request('get', "element/{$id}/checked"));
     }
 
     /**
@@ -222,7 +208,7 @@ class Browser implements BrowserInterface
      */
     public function setValue($id, $value)
     {
-        $this->client->postJson("element/{$id}/value", $value);
+        $this->client->request('post', "element/{$id}/value", ['form_params' => ['value' => $value]]);
     }
 
     /**
@@ -231,7 +217,7 @@ class Browser implements BrowserInterface
      */
     public function setFile($id, $file)
     {
-        $this->client->postJson("element/{$id}/upload", $file);
+        $this->client->request('post', "element/{$id}/upload", ['form_params' => ['value' => $file]]);
     }
 
     /**
@@ -239,7 +225,7 @@ class Browser implements BrowserInterface
      */
     public function click($id)
     {
-        $this->client->postJson("element/{$id}/click");
+        $this->client->request('post', "element/{$id}/click");
     }
 
     /**
@@ -247,7 +233,7 @@ class Browser implements BrowserInterface
      */
     public function select($id)
     {
-        $this->client->postJson("element/{$id}/select");
+        $this->client->request('post', "element/{$id}/select");
     }
 
     /**
@@ -256,7 +242,12 @@ class Browser implements BrowserInterface
      */
     public function getElementIds(Query\AbstractQuery $query)
     {
-        return $this->client->postJson('elements', '.'.$query->getXPath());
+        return $this->jsonResponse(
+            $this->client->request('post',
+                'elements',
+                ['form_params' => ['value' => '.'.$query->getXPath()]]
+            )
+        );
     }
 
     /**
@@ -266,7 +257,12 @@ class Browser implements BrowserInterface
      */
     public function getChildElementIds(Query\AbstractQuery $query, $parentId)
     {
-        return $this->client->postJson("element/$parentId/elements", '.'.$query->getXPath());
+        return $this->jsonResponse(
+            $this->client->request('post',
+                "element/$parentId/elements",
+                ['form_params' => ['value' => '.'.$query->getXPath()]]
+            )
+        );
     }
 
     /**

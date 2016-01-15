@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "63d1e58682e7aa7412148dbf135a4f00",
-    "content-hash": "ac7dc25ba61d5b56b070dab4c41432c9",
+    "hash": "68a6e56fd8c0b75a03148eef7871397d",
+    "content-hash": "4f7314086ebdbd40dee080c30f4c6a27",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -267,16 +267,16 @@
         },
         {
             "name": "spiderling-php/attempt",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/attempt.git",
-                "reference": "663c9087e21343b16eabed6d877257f8cdca9102"
+                "reference": "9031d56f20cb37ec8f58e7885afb0a42e9dfd7c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/attempt/zipball/663c9087e21343b16eabed6d877257f8cdca9102",
-                "reference": "663c9087e21343b16eabed6d877257f8cdca9102",
+                "url": "https://api.github.com/repos/spiderling-php/attempt/zipball/9031d56f20cb37ec8f58e7885afb0a42e9dfd7c3",
+                "reference": "9031d56f20cb37ec8f58e7885afb0a42e9dfd7c3",
                 "shasum": ""
             },
             "type": "library",
@@ -298,7 +298,7 @@
                 }
             ],
             "description": "Retry something until it works",
-            "time": "2015-09-14 19:28:57"
+            "time": "2016-01-14 17:39:49"
         },
         {
             "name": "spiderling-php/spiderling",
@@ -343,16 +343,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.8.1",
+            "version": "v2.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "eaa3320e32f09a01dc432c6efbe8051aee59cfef"
+                "reference": "ac06d8173bd80790536c0a4a634a7d705b91f54f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/eaa3320e32f09a01dc432c6efbe8051aee59cfef",
-                "reference": "eaa3320e32f09a01dc432c6efbe8051aee59cfef",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ac06d8173bd80790536c0a4a634a7d705b91f54f",
+                "reference": "ac06d8173bd80790536c0a4a634a7d705b91f54f",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +392,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2015-12-05 17:37:59"
+            "time": "2016-01-03 15:33:41"
         },
         {
             "name": "symfony/process",
@@ -451,12 +451,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spiderling-php/driver-test.git",
-                "reference": "42323b9e4d21e254e6dbca6bc780863e3ca22871"
+                "reference": "7eed00e146af6ee54e09702f1bb01ce0412fc40d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/42323b9e4d21e254e6dbca6bc780863e3ca22871",
-                "reference": "42323b9e4d21e254e6dbca6bc780863e3ca22871",
+                "url": "https://api.github.com/repos/spiderling-php/driver-test/zipball/7eed00e146af6ee54e09702f1bb01ce0412fc40d",
+                "reference": "7eed00e146af6ee54e09702f1bb01ce0412fc40d",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 }
             ],
             "description": "Integration tests for spiderling drivers",
-            "time": "2015-12-28 12:58:53"
+            "time": "2015-12-28 13:08:47"
         }
     ],
     "aliases": [],

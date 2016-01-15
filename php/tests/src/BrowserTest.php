@@ -5,6 +5,7 @@ namespace SP\PhantomDriver\Test;
 use PHPUnit_Framework_TestCase;
 use SP\PhantomDriver\Browser;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Psr7\Response;
 use SP\Spiderling\Query;
 
 /**
@@ -18,29 +19,18 @@ class BrowserTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->server = $this
-            ->getMockBuilder('SP\PhantomDriver\Server')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->client = $this
-            ->getMockBuilder('SP\PhantomDriver\Client')
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->driver = new Browser($this->server, $this->client);
+        $this->client = $this->getMock('GuzzleHttp\ClientInterface');
+        $this->driver = new Browser($this->client);
     }
 
     /**
      * @covers ::__construct
      * @covers ::getClient
-     * @covers ::getServer
      */
     public function testConstruct()
     {
-        $driver = new Browser($this->server, $this->client);
+        $driver = new Browser($this->client);
 
-        $this->assertSame($this->server, $driver->getServer());
         $this->assertSame($this->client, $driver->getClient());
     }
 
@@ -51,25 +41,20 @@ class BrowserTest extends PHPUnit_Framework_TestCase
     {
         $this->client
             ->expects($this->once())
-            ->method('deleteJson')
-            ->with('cookies');
+            ->method('request')
+            ->with('delete', 'cookies');
 
         $this->driver->removeAllCookies();
     }
 
     /**
-     * @covers ::start
+     * @covers ::jsonResponse
      */
-    public function testStart()
+    public function testJsonResponse()
     {
-        $this->server
-            ->expects($this->once())
-            ->method('start')
-            ->willReturn('promise');
+        $response = $this->driver->jsonResponse(new Response(200, [], '[{"one":"test"}]'));
 
-        $response = $this->driver->start();
-
-        $this->assertEquals('promise', $response);
+        $this->assertSame([['one' => 'test']], $response);
     }
 
     /**
@@ -77,17 +62,15 @@ class BrowserTest extends PHPUnit_Framework_TestCase
      */
     public function testGetUri()
     {
-        $expected = new Uri('http://example.com');
-
         $this->client
             ->expects($this->once())
-            ->method('getJson')
-            ->with('url')
-            ->willReturn((string) $expected);
+            ->method('request')
+            ->with('get', 'url')
+            ->willReturn(new Response(200, [], '"http://example.com"'));
 
         $result = $this->driver->getUri();
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals(new Uri('http://example.com'), $result);
     }
 
     public function dataActions()
@@ -109,8 +92,8 @@ class BrowserTest extends PHPUnit_Framework_TestCase
     {
         $this->client
             ->expects($this->once())
-            ->method('postJson')
-            ->with($uri);
+            ->method('request')
+            ->with('post', $uri);
 
         call_user_func_array([$this->driver, $method], $params);
     }
@@ -118,19 +101,19 @@ class BrowserTest extends PHPUnit_Framework_TestCase
     public function dataReturnSetters()
     {
         return [
-            [
+            'executeJs' => [
                 'executeJs',
                 ['console.log("a")'],
                 'execute',
                 'console.log("a")'
             ],
-            [
+            'getElementIds' => [
                 'getElementIds',
                 [new Query\Css('#test')],
                 'elements',
                 './/*[@id = \'test\']'
             ],
-            [
+            'getChildElementIds' => [
                 'getChildElementIds',
                 [new Query\Css('#me'), 12],
                 'element/12/elements',
@@ -147,25 +130,65 @@ class BrowserTest extends PHPUnit_Framework_TestCase
      */
     public function testReturnSetters($method, $params, $uri, $value)
     {
-        $expected = 'return value';
+        $response = new Response(200, [], '"return value"');
 
         $this->client
             ->expects($this->once())
-            ->method('postJson')
-            ->with($uri, $value)
-            ->willReturn($expected);
+            ->method('request')
+            ->with('post', $uri, ['form_params' => ['value' => $value]])
+            ->willReturn($response);
 
         $result = call_user_func_array([$this->driver, $method], $params);
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals('return value', $result);
+    }
+
+
+    public function dataQueryIds()
+    {
+        return [
+            'Global' => [
+                new Query\Css('#test'),
+                null,
+                'elements',
+                './/*[@id = \'test\']'
+            ],
+            'Children' => [
+                new Query\Css('#me'),
+                12,
+                'element/12/elements',
+                './/*[@id = \'me\']'
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider dataQueryIds
+     * @covers ::queryIds
+     */
+    public function testQueryIds($query, $parentId, $uri, $value)
+    {
+        $response = new Response(200, [], '["22", "23"]');
+
+        $this->client
+            ->expects($this->once())
+            ->method('request')
+            ->with('post', $uri, ['form_params' => ['value' => $value]])
+            ->willReturn($response);
+
+        $result = $this->driver->queryIds($query, $parentId);
+
+        $this->assertEquals([22, 23], $result);
     }
 
     public function dataSetters()
     {
         return [
-            ['open', [new Uri('http://example.com')], 'url', 'http://example.com'],
-            ['saveScreenshot', ['file.jpg'], 'screenshot', 'file.jpg'],
-            ['setValue', [2, 'val'], 'element/2/value', 'val'],
+            'open' => ['open', [new Uri('http://example.com')], 'url', 'http://example.com'],
+            'saveScreenshot' => ['saveScreenshot', ['file.jpg'], 'screenshot', 'file.jpg'],
+            'confirm' => ['confirm', [true], 'confirm', true],
+            'setValue' => ['setValue', [2, 'val'], 'element/2/value', 'val'],
+            'setFile' => ['setFile', [2, 'file.txt'], 'element/2/upload', 'file.txt'],
         ];
     }
 
@@ -174,14 +197,16 @@ class BrowserTest extends PHPUnit_Framework_TestCase
      * @covers ::open
      * @covers ::saveScreenshot
      * @covers ::setValue
+     * @covers ::setFile
+     * @covers ::confirm
      * @covers ::executeJs
      */
     public function testSetters($method, $params, $uri, $value)
     {
         $this->client
             ->expects($this->once())
-            ->method('postJson')
-            ->with($uri, $value);
+            ->method('request')
+            ->with('post', $uri, ['form_params' => ['value' => $value]]);
 
         call_user_func_array([$this->driver, $method], $params);
     }
@@ -192,6 +217,7 @@ class BrowserTest extends PHPUnit_Framework_TestCase
             ['getJsMessages', [], 'messages'],
             ['getJsErrors', [], 'errors'],
             ['getFullHtml', [], 'source'],
+            ['getAlertText', [], 'alert'],
             ['getText', [1], 'element/1/text'],
             ['getTagName', [2], 'element/2/name'],
             ['getAttribute', [3, 'href'], 'element/3/attribute/href'],
@@ -206,6 +232,7 @@ class BrowserTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider dataGetters
      * @covers ::getJsMessages
+     * @covers ::getAlertText
      * @covers ::getJsErrors
      * @covers ::getFullHtml
      * @covers ::getText
@@ -219,16 +246,16 @@ class BrowserTest extends PHPUnit_Framework_TestCase
      */
     public function testElementGetters($method, $params, $uri)
     {
-        $expected = 'some value';
+        $response = new Response(200, [], '"return value"');
 
         $this->client
             ->expects($this->once())
-            ->method('getJson')
-            ->with($uri)
-            ->willReturn($expected);
+            ->method('request')
+            ->with('get', $uri)
+            ->willReturn($response);
 
         $result = call_user_func_array([$this->driver, $method], $params);
 
-        $this->assertEquals($expected, $result);
+        $this->assertEquals('return value', $result);
     }
 }

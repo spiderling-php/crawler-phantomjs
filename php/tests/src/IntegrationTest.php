@@ -3,6 +3,7 @@
 namespace SP\PhantomDriver\Test;
 
 use SP\DriverTest\BrowserDriverTest;
+use SP\PhantomDriver\Server;
 use SP\PhantomDriver\Browser;
 
 class IntegrationTest extends BrowserDriverTest
@@ -11,9 +12,9 @@ class IntegrationTest extends BrowserDriverTest
     {
         parent::setUpBeforeClass();
 
-        $driver = new Browser();
-        $driver->start()->wait();
+        $server = new Server();
+        $server->start()->wait();
 
-        self::setDriver($driver);
+        self::setDriver(new Browser($server->getClient()));
     }
 }
